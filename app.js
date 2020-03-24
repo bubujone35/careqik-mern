@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -20,14 +21,13 @@ mongoose.connection.on('error', err => {
 //bring in routes
 const postRoutes = require('./routes/post')
 
+
 //middleware
 app.use(morgan("dev"));
-
+app.use(bodyParser.json());
 app.use("/", postRoutes);
 
-
-
-const port = 8080;
+const port = process.env.PORT ||  8080;
 app.listen(port, () => {
   console.log(`A node JS API is listening on port ${port}`)
 });
