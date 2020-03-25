@@ -26,8 +26,8 @@ const postRoutes = require('./routes/post')
 //middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use("/", postRoutes);
 app.use(expressValidator());
+app.use("/", postRoutes);
 
 const port = process.env.PORT ||  8080;
 app.listen(port, () => {
