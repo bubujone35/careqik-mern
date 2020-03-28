@@ -20,7 +20,9 @@ mongoose.connection.on('error', err => {
 
 
 //bring in routes
-const postRoutes = require('./routes/post')
+const postRoutes = require('./routes/post');
+const authRoutes = require('./routes/auth');
+
 
 
 //middleware
@@ -28,6 +30,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use("/", postRoutes);
+app.use("/", authRoutes);
+
 
 const port = process.env.PORT ||  8080;
 app.listen(port, () => {
