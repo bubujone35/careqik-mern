@@ -51,6 +51,20 @@ exports.updateUser = (req, res, next) => {
     }
     user.hashed_password = undefined;
     user.salt = undefined;
-    res.json({user}); 
+    res.json({ user });
+  })
+}
+
+exports.deleteUser = (req, res, next) => {
+  let user = req.profile;
+  user.remove((err, user) => {
+    if(err) {
+      return res.status(400).json({
+        error: err
+      })
+    }
+    user.hashed_password = undefined;
+    user.salt = undefined;
+    res.json({ message: "User deleted successfully!" });
   })
 }
